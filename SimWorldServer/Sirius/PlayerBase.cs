@@ -550,7 +550,7 @@ public class PlayerBase
         lock (CDyMsgPackManager.msgTempleArr[HeroPack.def_SC_Logging].mLock)
         {
             CDyMsgPackManager.msgTempleArr[HeroPack.def_SC_Logging].mValueArr[0].Set(mIslogging?1:0);
-            CDyMsgPackManager.msgTempleArr[HeroPack.def_SC_Dig].SendMsg(client);
+            CDyMsgPackManager.msgTempleArr[HeroPack.def_SC_Logging].SendMsg(client);
         }
     }
 

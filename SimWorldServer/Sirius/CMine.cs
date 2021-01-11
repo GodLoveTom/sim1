@@ -310,7 +310,9 @@ public  class CMine
         long value = gDefine.gRandom.Next(0, 10000000);
         if ( IsMine == 0 )
         {
-            if (newMaxNum>=3 &&  value < CalcSearchPrec(p.mZhiLi, 30000) * 10000000)
+            return CreateMine(eMineType.clay, 1, p);
+
+            if (newMaxNum >= 3 && value < CalcSearchPrec(p.mZhiLi, 30000) * 10000000)
                 return CreateMine(eMineType.Gold, 3, p);
             else if (newMaxNum >= 2 && value < CalcSearchPrec(p.mZhiLi, 20000) * 10000000)
                 return CreateMine(eMineType.Gold, 2, p);
@@ -323,23 +325,36 @@ public  class CMine
             else if (value < CalcSearchPrec(p.mZhiLi, 100) * 10000000)
                 return CreateMine(eMineType.Copper, 1, p);
             else if (newMaxNum >= 3 && value < CalcSearchPrec(p.mZhiLi, 30) * 10000000)
-                return CreateMine(eMineType.Iron, 3, p);
+            {
+                value = gDefine.gRandom.Next(0, 30);
+                if(value<10)
+                    return CreateMine(eMineType.Iron, 3, p);
+                else if (value < 20)
+                    return CreateMine(eMineType.clay, 3, p);
+                else
+                    return CreateMine(eMineType.Limestone, 3, p);
+            }
+               
             else if (newMaxNum >= 2 && value < CalcSearchPrec(p.mZhiLi, 20) * 10000000)
-                return CreateMine(eMineType.Iron, 2, p);
+            {
+                value = gDefine.gRandom.Next(0, 30);
+                if (value < 10)
+                    return CreateMine(eMineType.Iron, 2, p);
+                else if (value < 20)
+                    return CreateMine(eMineType.clay, 2, p);
+                else
+                    return CreateMine(eMineType.Limestone, 2, p);
+            }
             else if (value < CalcSearchPrec(p.mZhiLi, 10) * 10000000)
-                return CreateMine(eMineType.Iron, 1, p);
-            else if (newMaxNum >= 3 && value < CalcSearchPrec(p.mZhiLi, 30) * 10000000)
-                return CreateMine(eMineType.clay, 3, p);
-            else if (newMaxNum >= 2 && value < CalcSearchPrec(p.mZhiLi, 20) * 10000000)
-                return CreateMine(eMineType.clay, 2, p);
-            else if (value < CalcSearchPrec(p.mZhiLi, 10) * 10000000)
-                return CreateMine(eMineType.clay, 1, p);
-            else if (newMaxNum >= 3 && value < CalcSearchPrec(p.mZhiLi, 30) * 10000000)
-                return CreateMine(eMineType.Limestone, 3, p);
-            else if (newMaxNum >= 2 && value < CalcSearchPrec(p.mZhiLi, 20) * 10000000)
-                return CreateMine(eMineType.Limestone, 2, p);
-            else if (value < CalcSearchPrec(p.mZhiLi, 10) * 10000000)
-                return CreateMine(eMineType.Limestone, 1, p);
+            {
+                value = gDefine.gRandom.Next(0, 30);
+                if (value < 10)
+                    return CreateMine(eMineType.Iron, 1, p);
+                else if (value < 20)
+                    return CreateMine(eMineType.clay, 1, p);
+                else
+                    return CreateMine(eMineType.Limestone, 1, p);
+            }
             else
                 return null;
         }

@@ -128,6 +128,8 @@ public class CGameserver
 
             data.SendDigMsg();
 
+            data.SendLoggingMsg();
+
             data.SendMineMsg();
 
             data.SendResMsg();
