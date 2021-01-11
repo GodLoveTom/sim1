@@ -58,6 +58,11 @@ public static class CClientInput
             {
                 gDefine.gPlayerBase.Refresh();
             }
+            else if (string.Compare("online", str) == 0)
+            {
+                int number = gDefine.gPlayerBase.CalcOnLineNum();
+                Console.WriteLine("Count:" + number.ToString());
+            }
             else if(str.Length > 7 &&  str.Substring(0,5)=="name ")
             {
                 string name = str.Substring(5);

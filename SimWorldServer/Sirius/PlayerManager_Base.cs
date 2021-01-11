@@ -320,6 +320,17 @@ public class PlayerManager_Base
         }
     }
 
+    public int CalcOnLineNum()
+    {
+        int count = 0;
+        foreach (PlayerBase p in mPlayerIdDict.Values)
+        {
+            if (p.IsOnLine())
+                count++;
+        }
+        return count;
+    }
+
     public void Update()
     {
         if( System.DateTime.Now.Ticks - mLastUpdateT >= (long)600000000)

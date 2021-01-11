@@ -310,7 +310,6 @@ public  class CMine
         long value = gDefine.gRandom.Next(0, 10000000);
         if ( IsMine == 0 )
         {
-            return CreateMine(eMineType.clay, 1, p);
 
             if (newMaxNum >= 3 && value < CalcSearchPrec(p.mZhiLi, 30000) * 10000000)
                 return CreateMine(eMineType.Gold, 3, p);
