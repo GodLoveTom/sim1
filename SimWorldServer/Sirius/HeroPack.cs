@@ -122,5 +122,9 @@
     //探索-金币探索
     public const int def_CS_SearchMineCoin = 254; //
 
+    //开始砍伐木材
+    public const int def_CS_BeginLogging = 255; //开始伐木
+    public const int def_CS_Logging = 256;//查询伐木状态
+    public const int def_SC_Logging = 257; //返回伐木状态
 
 }

@@ -604,6 +604,26 @@ public class CGameserver
         }
     }
 
+    public void def_CS_BeginLogging(CDyMsgPack msg, IPEndPoint client)
+    {
+        long uid = msg.mValueArr[0].GetLong();
+        PlayerBase p = gDefine.gPlayerBase.Find(uid);
+        if (p != null)
+        {
+            p.BeginLoggin();
+        }
+    }
+
+    public void def_CS_Logging(CDyMsgPack msg, IPEndPoint client)
+    {
+        long uid = msg.mValueArr[0].GetLong();
+        PlayerBase p = gDefine.gPlayerBase.Find(uid);
+        if (p != null)
+        {
+            p.SendLoggingMsg();
+        }
+    }
+
 
     public void Init()
     {
@@ -667,6 +687,10 @@ public class CGameserver
         CDyMsgPackManager.RegisterCallBack(HeroPack.def_CS_ChangeNickName, def_CS_ChangeNickName);
 
         CDyMsgPackManager.RegisterCallBack(HeroPack.def_CS_SearchMineCoin, def_CS_SearchMineCoin);
+
+        CDyMsgPackManager.RegisterCallBack(HeroPack.def_CS_BeginLogging, def_CS_BeginLogging);
+        CDyMsgPackManager.RegisterCallBack(HeroPack.def_CS_Logging, def_CS_Logging);
+       
 
 
     }

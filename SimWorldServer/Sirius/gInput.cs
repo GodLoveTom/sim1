@@ -35,7 +35,7 @@ public static class CClientInput
             {
                 string name = "bingfeng";
                 string password = "12345678";
-                string mail = "bingfeng@sina.xom";
+                //string mail = "bingfeng@sina.xom";
 
                 int error = 0;
 

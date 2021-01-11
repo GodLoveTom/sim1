@@ -64,6 +64,8 @@ public class PlayerBase
     public long mDigMineBeginT = 0;
 
     public long mDigMineId = -1;
+    public bool mIslogging = false; //当前是否在伐木
+    public long mLoggingBT = 0; //伐木计时
 
     public CPlayerMineData mMineData = new CPlayerMineData();
 
@@ -523,6 +525,36 @@ public class PlayerBase
         }
     }
 
+    public void BeginLoggin()
+    {
+        if (mIslogging)
+            return;
+
+        mIslogging = true;
+        
+        mLoggingBT = System.DateTime.Now.Ticks;
+        SendLoggingMsg();
+
+        mDigMineId = -1; //采矿将被终止
+        SendDigMsg();
+
+        NeedSave();
+
+    }
+
+    public void SendLoggingMsg()
+    {
+        if (!IsOnLine())
+            return;
+
+        lock (CDyMsgPackManager.msgTempleArr[HeroPack.def_SC_Logging].mLock)
+        {
+            CDyMsgPackManager.msgTempleArr[HeroPack.def_SC_Logging].mValueArr[0].Set(mIslogging?1:0);
+            CDyMsgPackManager.msgTempleArr[HeroPack.def_SC_Dig].SendMsg(client);
+        }
+    }
+
+
     public void BeginDig(long MineId)
     {
         if (MineId == mDigMineId)
@@ -541,6 +573,11 @@ public class PlayerBase
             mine.mDigPlayerArr.Add(this);
 
             SendDigMsg();
+            if(mIslogging)
+            {
+                mIslogging = false; //终止伐木
+                SendLoggingMsg();
+            }
 
             NeedSave();
         }
@@ -551,7 +588,8 @@ public class PlayerBase
         if (!IsOnLine())
             return;
 
-        CMineData mine = gDefine.gMine.Find(mDigMineId);
+        CMineData mine = (mDigMineId > 0) ? gDefine.gMine.Find(mDigMineId) : null;
+        
         if( mine != null && mine.mResNum > 0)
         {
             lock (CDyMsgPackManager.msgTempleArr[HeroPack.def_SC_Dig].mLock)
@@ -642,6 +680,10 @@ public class PlayerBase
             CDyMsgPackManager.msgTempleArr[HeroPack.def_SC_AskRes].mValueArr[1].Set(mCopper);
             CDyMsgPackManager.msgTempleArr[HeroPack.def_SC_AskRes].mValueArr[2].Set(mGold);
             CDyMsgPackManager.msgTempleArr[HeroPack.def_SC_AskRes].mValueArr[3].Set(mFood);
+            CDyMsgPackManager.msgTempleArr[HeroPack.def_SC_AskRes].mValueArr[4].Set(mWood);
+            CDyMsgPackManager.msgTempleArr[HeroPack.def_SC_AskRes].mValueArr[5].Set(mClay);
+            CDyMsgPackManager.msgTempleArr[HeroPack.def_SC_AskRes].mValueArr[6].Set(mLimestone);
+
             CDyMsgPackManager.msgTempleArr[HeroPack.def_SC_AskRes].SendMsg(client);
         }
     }
@@ -772,6 +814,8 @@ public class PlayerBase
         node.AddParam("mDigMineId", mDigMineId);
         node.AddParam("gold", mGold);
 
+        node.AddParam("mIslogging", mIslogging?1:0);
+
     }
 
     public void Load(QuickData.CQDDataNode node)
@@ -804,6 +848,8 @@ public class PlayerBase
         mDigMineBeginT = node.GetParamValueLongByName("mDigMineBeginT",0);
         mDigMineId = node.GetParamValueLongByName("mDigMineId", 0);
 
+       
+
 
         // mDaoDe = node.GetParamValueDouble(11);
         // mZhiLi = node.GetParamValueDouble(12);
@@ -815,12 +861,14 @@ public class PlayerBase
         // mDigMineBeginT = node.GetParamValueLong(16);
         // mDigMineId = node.GetParamValueLong(17);
 
-       
+
         mGold = node.GetParamValueDoubleByName("gold", 0);
 
         mWood = node.GetParamValueDoubleByName("wood", 0);
         mClay = node.GetParamValueDoubleByName("clay", 0);
         mLimestone = node.GetParamValueDoubleByName("limestone", 0);
+
+        mIslogging = (node.GetParamValueIntByName("mIslogging", 0) == 0) ? false : true;
     }
 
     public void LoadFromEdit(QuickData.CQDDataNode node)
@@ -868,6 +916,8 @@ public class PlayerBase
         mClay = node.GetParamValueDoubleByName("clay", 0);
         mLimestone = node.GetParamValueDoubleByName("limestone", 0);
 
+        mIslogging = (node.GetParamValueIntByName("mIslogging", 0) == 0) ? false : true;
+
         NeedSave();
     }
 
@@ -885,6 +935,54 @@ public class PlayerBase
             return true;
         else
             return false;
+    }
+
+    public void UpdateLogging()
+    {
+        if (!mIslogging)
+            return;
+
+        if (mDigMineBeginT <= 0)
+        {
+            mDigMineBeginT = System.DateTime.Now.Ticks;
+            return;
+        }
+
+        if (System.DateTime.Now.Ticks - mDigMineBeginT > (long)600000000)
+        {
+            int min = (int)((System.DateTime.Now.Ticks - mDigMineBeginT) / (long)600000000);
+            mDigMineBeginT += min * (long)600000000;
+
+            double digValue = 0;
+            if (min <= mCurTiLi)
+            {
+                mCurTiLi -= min;
+                digValue = mCurTiLi / (10 + (mCurTiLi - 10.0) / (100 + (mCurTiLi - 10) / 100.0));
+                digValue *= min;
+            }
+            else
+            {
+                int tmpmin = (int)mCurTiLi;
+                min -= (int)mCurTiLi;
+
+                digValue = mCurTiLi / (10 + (mCurTiLi - 10.0) / (100 + (mCurTiLi - 10) / 100.0));
+                digValue *= mCurTiLi;
+
+                mCurTiLi = 0;
+            }
+
+            mWood += digValue;
+            SendResMsg();
+            NeedSave();
+            
+
+        }
+
+
+
+
+
+
     }
 
     public void UpdateDig()
@@ -969,6 +1067,18 @@ public class PlayerBase
                     {
                         mIron += digValue - ownerValue;
                         mine.mRefOwner.mIron += ownerValue;
+                        mine.mRefOwner.NeedSave();
+                    }
+                    else if (mine.mMineType == CMine.eMineType.clay)
+                    {
+                        mClay += digValue - ownerValue;
+                        mine.mRefOwner.mClay += ownerValue;
+                        mine.mRefOwner.NeedSave();
+                    }
+                    else if (mine.mMineType == CMine.eMineType.Limestone)
+                    {
+                        mLimestone += digValue - ownerValue;
+                        mine.mRefOwner.mLimestone += ownerValue;
                         mine.mRefOwner.NeedSave();
                     }
                     else if (mine.mMineType == CMine.eMineType.Gold)

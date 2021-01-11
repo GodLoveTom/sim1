@@ -34,9 +34,9 @@
         CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_SC_AskRes, CBaseValue.eBaseValue.Double); //copper
         CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_SC_AskRes, CBaseValue.eBaseValue.Double); //gold
         CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_SC_AskRes, CBaseValue.eBaseValue.Double); //apple
-
-
-
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_SC_AskRes, CBaseValue.eBaseValue.Double); //wood
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_SC_AskRes, CBaseValue.eBaseValue.Double); //clay
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_SC_AskRes, CBaseValue.eBaseValue.Double); //limestone
 
         //money更新消息
         CDyMsgPackManager.RegisterClearMsg(HeroPack.def_CS_Money, false);
@@ -111,9 +111,7 @@
         CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_CS_IsMailExist, CBaseValue.eBaseValue.String);//mail
 
         CDyMsgPackManager.RegisterClearMsg(HeroPack.def_SC_IsMailExist, false);
-        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_SC_IsMailExist, CBaseValue.eBaseValue.Bool);//true 存在 false 不存在
-
-
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_SC_IsMailExist, CBaseValue.eBaseValue.Bool);//true 存在 false 不存在`
 
         //main data
         CDyMsgPackManager.RegisterClearMsg(HeroPack.def_SC_MainData, false);
@@ -331,6 +329,20 @@
         CDyMsgPackManager.RegisterClearMsg(HeroPack.def_CS_SearchMineCoin, false);
         CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_CS_SearchMineCoin, CBaseValue.eBaseValue.Long);////self uid
         CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_CS_SearchMineCoin, CBaseValue.eBaseValue.Int); //0 mine, 1 apple.
+
+
+        //伐木消息注册
+        CDyMsgPackManager.RegisterClearMsg(HeroPack.def_CS_BeginLogging, false);
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_CS_BeginLogging, CBaseValue.eBaseValue.Long);////self uid
+
+        CDyMsgPackManager.RegisterClearMsg(HeroPack.def_CS_Logging, false);
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_CS_Logging, CBaseValue.eBaseValue.Long);////self uid
+
+
+        CDyMsgPackManager.RegisterClearMsg(HeroPack.def_SC_Logging, false);
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_SC_Logging, CBaseValue.eBaseValue.Int);//0 stop, 1 logging 
+
+
 
 
 

@@ -147,8 +147,8 @@ public  class CMine
         Copper,
         Gold,
         Apple,
-        //clay,
-        //Limestone,
+        clay,
+        Limestone,
     }
 
     public long mIdCount = 6666;
@@ -328,6 +328,18 @@ public  class CMine
                 return CreateMine(eMineType.Iron, 2, p);
             else if (value < CalcSearchPrec(p.mZhiLi, 10) * 10000000)
                 return CreateMine(eMineType.Iron, 1, p);
+            else if (newMaxNum >= 3 && value < CalcSearchPrec(p.mZhiLi, 30) * 10000000)
+                return CreateMine(eMineType.clay, 3, p);
+            else if (newMaxNum >= 2 && value < CalcSearchPrec(p.mZhiLi, 20) * 10000000)
+                return CreateMine(eMineType.clay, 2, p);
+            else if (value < CalcSearchPrec(p.mZhiLi, 10) * 10000000)
+                return CreateMine(eMineType.clay, 1, p);
+            else if (newMaxNum >= 3 && value < CalcSearchPrec(p.mZhiLi, 30) * 10000000)
+                return CreateMine(eMineType.Limestone, 3, p);
+            else if (newMaxNum >= 2 && value < CalcSearchPrec(p.mZhiLi, 20) * 10000000)
+                return CreateMine(eMineType.Limestone, 2, p);
+            else if (value < CalcSearchPrec(p.mZhiLi, 10) * 10000000)
+                return CreateMine(eMineType.Limestone, 1, p);
             else
                 return null;
         }
