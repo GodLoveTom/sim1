@@ -71,8 +71,11 @@
   <ItemGroup>
     <Compile Include="BufferHelper.cs" />
     <Compile Include="CBaseValue.cs" />
+    <Compile Include="CDefine.cs" />
     <Compile Include="CDyMsgPack.cs" />
+    <Compile Include="CInvent.cs" />
     <Compile Include="CIPGuard.cs" />
+    <Compile Include="CMachine.cs" />
     <Compile Include="CMine.cs" />
     <Compile Include="CPlayerTrade.cs" />
     <Compile Include="HeroPack.cs" />

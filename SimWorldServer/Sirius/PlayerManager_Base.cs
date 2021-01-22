@@ -329,6 +329,7 @@ public class PlayerManager_Base
             foreach (PlayerBase p in mPlayerIdDict.Values)
             {
                 p.UpdateLogging();
+                p.mMachine.Update(p);
                 p.UpdateDig();
                 p.AutoEatApple();
             }
@@ -340,9 +341,6 @@ public class PlayerManager_Base
 
         //    Refresh(); 
         //}
-
-        
-
 
     }
 

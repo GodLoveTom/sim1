@@ -37,6 +37,8 @@
         CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_SC_AskRes, CBaseValue.eBaseValue.Double); //wood
         CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_SC_AskRes, CBaseValue.eBaseValue.Double); //clay
         CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_SC_AskRes, CBaseValue.eBaseValue.Double); //limestone
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_SC_AskRes, CBaseValue.eBaseValue.Double); //ironR
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_SC_AskRes, CBaseValue.eBaseValue.Double); //copperR
 
         //money更新消息
         CDyMsgPackManager.RegisterClearMsg(HeroPack.def_CS_Money, false);
@@ -245,6 +247,11 @@
         CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_CS_TrideItem, CBaseValue.eBaseValue.Double);//gold
         CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_CS_TrideItem, CBaseValue.eBaseValue.Double);//apple
         CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_CS_TrideItem, CBaseValue.eBaseValue.Double);//money
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_CS_TrideItem, CBaseValue.eBaseValue.Double);//wood
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_CS_TrideItem, CBaseValue.eBaseValue.Double);//clay
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_CS_TrideItem, CBaseValue.eBaseValue.Double);//limestone
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_CS_TrideItem, CBaseValue.eBaseValue.Double);//ironR
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_CS_TrideItem, CBaseValue.eBaseValue.Double);//copperR
 
         CDyMsgPackManager.RegisterClearMsg(HeroPack.def_SC_TrideItem, false);
         CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_SC_TrideItem, CBaseValue.eBaseValue.Long);   //uid
@@ -253,6 +260,11 @@
         CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_SC_TrideItem, CBaseValue.eBaseValue.Double);//gold
         CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_SC_TrideItem, CBaseValue.eBaseValue.Double);//apple
         CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_SC_TrideItem, CBaseValue.eBaseValue.Double);//money
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_SC_TrideItem, CBaseValue.eBaseValue.Double);//wood
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_SC_TrideItem, CBaseValue.eBaseValue.Double);//clay
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_SC_TrideItem, CBaseValue.eBaseValue.Double);//limestone
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_SC_TrideItem, CBaseValue.eBaseValue.Double);//ironR
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_SC_TrideItem, CBaseValue.eBaseValue.Double);//copperR
 
         CDyMsgPackManager.RegisterClearMsg(HeroPack.def_CS_TrideLock, false);
         CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_CS_TrideLock, CBaseValue.eBaseValue.Long);//self uid
@@ -294,6 +306,11 @@
         CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_SC_TrideFinish, CBaseValue.eBaseValue.Double);//gold
         CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_SC_TrideFinish, CBaseValue.eBaseValue.Double);//apple
         CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_SC_TrideFinish, CBaseValue.eBaseValue.Double);//money
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_SC_TrideFinish, CBaseValue.eBaseValue.Double);//wood
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_SC_TrideFinish, CBaseValue.eBaseValue.Double);//clay
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_SC_TrideFinish, CBaseValue.eBaseValue.Double);//limestone
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_SC_TrideFinish, CBaseValue.eBaseValue.Double);//ironR
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_SC_TrideFinish, CBaseValue.eBaseValue.Double);//copperR
 
         CDyMsgPackManager.RegisterClearMsg(HeroPack.def_CS_TrideEnd, false);
         CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_CS_TrideEnd, CBaseValue.eBaseValue.Long);   //uid
@@ -342,14 +359,74 @@
         CDyMsgPackManager.RegisterClearMsg(HeroPack.def_SC_Logging, false);
         CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_SC_Logging, CBaseValue.eBaseValue.Int);//0 stop, 1 logging 
 
+        CDyMsgPackManager.RegisterClearMsg(HeroPack.def_CS_BeginInvent, false);
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_CS_BeginInvent, CBaseValue.eBaseValue.Long);////self uid
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_CS_BeginInvent, CBaseValue.eBaseValue.String);//name
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_CS_BeginInvent, CBaseValue.eBaseValue.String);//des
+
+        CDyMsgPackManager.RegisterClearMsg(HeroPack.def_CS_Invent, false);
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_CS_Invent, CBaseValue.eBaseValue.Long);////self uid
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_CS_Invent, CBaseValue.eBaseValue.Long); //id  -1,全部
+
+        //发明创造
+        CDyMsgPackManager.RegisterClearMsg(HeroPack.def_SC_Invent, false);
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_SC_Invent, CBaseValue.eBaseValue.String);////name
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_SC_Invent, CBaseValue.eBaseValue.String); //des
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_SC_Invent, CBaseValue.eBaseValue.Long);////发明唯一id
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_SC_Invent, CBaseValue.eBaseValue.Long);////发明者的Id
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_SC_Invent, CBaseValue.eBaseValue.Long);////专利Id 0 ：无专利； 1提出专利申请 ； >1000 专利Id 
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_SC_Invent, CBaseValue.eBaseValue.Int);///当前状态
+         //设备制造原料
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_SC_Invent, CBaseValue.eBaseValue.Double);////iron
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_SC_Invent, CBaseValue.eBaseValue.Double);////copper
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_SC_Invent, CBaseValue.eBaseValue.Double);///gold
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_SC_Invent, CBaseValue.eBaseValue.Double);///wood
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_SC_Invent, CBaseValue.eBaseValue.Double);///clay
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_SC_Invent, CBaseValue.eBaseValue.Double);///limeStone
+        //生产原料
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_SC_Invent, CBaseValue.eBaseValue.Double);////iron
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_SC_Invent, CBaseValue.eBaseValue.Double);////copper
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_SC_Invent, CBaseValue.eBaseValue.Double);///gold
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_SC_Invent, CBaseValue.eBaseValue.Double);///wood
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_SC_Invent, CBaseValue.eBaseValue.Double);///clay
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_SC_Invent, CBaseValue.eBaseValue.Double);///limeStone
+        //
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_SC_Invent, CBaseValue.eBaseValue.Int);////生产类型
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_SC_Invent, CBaseValue.eBaseValue.Double);////数量
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_SC_Invent, CBaseValue.eBaseValue.Float);///时间s
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_SC_Invent, CBaseValue.eBaseValue.String);///机器名称
 
 
 
+        //开始申请专利
+        CDyMsgPackManager.RegisterClearMsg(HeroPack.def_CS_PatentApply, false);
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_CS_PatentApply, CBaseValue.eBaseValue.Long);//uid
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_CS_PatentApply, CBaseValue.eBaseValue.Long);//蓝图id
+
+        //制造机器
+        CDyMsgPackManager.RegisterClearMsg(HeroPack.def_CS_MadeMachineByInvent, false);
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_CS_MadeMachineByInvent, CBaseValue.eBaseValue.Long);//uid
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_CS_MadeMachineByInvent, CBaseValue.eBaseValue.Long);//蓝图id
 
 
+        //查询机器
+        CDyMsgPackManager.RegisterClearMsg(HeroPack.def_CS_Machine, false);
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_CS_Machine, CBaseValue.eBaseValue.Long);//uid
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_CS_Machine, CBaseValue.eBaseValue.Long);//机器id -1为所有机器
 
-        //=============================================================================================================//
+        //查询机器返回
+        CDyMsgPackManager.RegisterClearMsg(HeroPack.def_SC_Machine, false);
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_SC_Machine, CBaseValue.eBaseValue.Long);//机器id
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_SC_Machine, CBaseValue.eBaseValue.Long);//对应蓝图id
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_SC_Machine, CBaseValue.eBaseValue.Int);//当前状态 0 空闲 1 生产  2新生产生成 
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_SC_Machine, CBaseValue.eBaseValue.String);//机器的名字
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_SC_Machine, CBaseValue.eBaseValue.Int);//耐久
 
+        //开始利用机器生产
+        CDyMsgPackManager.RegisterClearMsg(HeroPack.def_CS_ProduceByMachine, false);
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_CS_ProduceByMachine, CBaseValue.eBaseValue.Long);//uid
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_CS_ProduceByMachine, CBaseValue.eBaseValue.Long);//机器id
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_CS_ProduceByMachine, CBaseValue.eBaseValue.Bool);//true 开始生产 false 结束生产
 
 
 

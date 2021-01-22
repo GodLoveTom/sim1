@@ -24,21 +24,35 @@ public  class CPlayerTrade
     public double mGold;
     public double mFood;
     public double mMoney;
+    public double mWood;
+    public double mClay;
+    public double mLimestone;
+    public double mIronR;
+    public double mCopperR;
+
 
     CPlayerTrade mOther = null;
 
 
-    public void ChangeItem (double Iron, double Copper, double Gold, double Food, double Money)
+    public void ChangeItem (double Iron, double Copper, double Gold, double Food, double Money,
+       double Wood, double Clay, double LimeStone, double IronR, double CopperR)
     {
         if( mTradeState == eState.Open )
         {
-           if(mRefSelf.mIron >= Iron && mRefSelf.mCopper >= Copper && mRefSelf.mGold >= Gold && mRefSelf.mMoney >= Money )
+           if(mRefSelf.mIron >= Iron && mRefSelf.mCopper >= Copper && mRefSelf.mGold >= Gold && mRefSelf.mMoney >= Money
+               && mRefSelf.mWood >= Wood && mRefSelf.mClay >= Clay && mRefSelf.mIronR >= IronR && mRefSelf.mCopperR >= CopperR )
             {
                 mIron = Iron;
                 mCopper = Copper;
                 mGold = Gold;
                 mFood = Food;
                 mMoney = Money;
+
+                mIronR = IronR;
+                mCopperR = CopperR;
+                mWood =Wood;
+                mClay = Clay;
+                mLimestone = LimeStone;
 
                 lock (CDyMsgPackManager.msgTempleArr[HeroPack.def_SC_TrideItem].mLock)
                 {
@@ -48,6 +62,12 @@ public  class CPlayerTrade
                     CDyMsgPackManager.msgTempleArr[HeroPack.def_SC_TrideItem].mValueArr[3].Set(Gold);
                     CDyMsgPackManager.msgTempleArr[HeroPack.def_SC_TrideItem].mValueArr[4].Set(Food);
                     CDyMsgPackManager.msgTempleArr[HeroPack.def_SC_TrideItem].mValueArr[5].Set(Money);
+                    
+                     CDyMsgPackManager.msgTempleArr[HeroPack.def_SC_TrideItem].mValueArr[6].Set(Wood);
+                    CDyMsgPackManager.msgTempleArr[HeroPack.def_SC_TrideItem].mValueArr[7].Set(Clay);
+                    CDyMsgPackManager.msgTempleArr[HeroPack.def_SC_TrideItem].mValueArr[8].Set(LimeStone);
+                    CDyMsgPackManager.msgTempleArr[HeroPack.def_SC_TrideItem].mValueArr[9].Set(IronR);
+                    CDyMsgPackManager.msgTempleArr[HeroPack.def_SC_TrideItem].mValueArr[10].Set(CopperR);
 
                     CDyMsgPackManager.msgTempleArr[HeroPack.def_SC_TrideItem].SendMsg(mRefSelf.client);
                     CDyMsgPackManager.msgTempleArr[HeroPack.def_SC_TrideItem].SendMsg(mOther.mRefSelf.client);
@@ -117,6 +137,13 @@ public  class CPlayerTrade
         mRefSelf.mFood = mRefSelf.mFood - mFood + mOther.mFood;
         mRefSelf.mMoney = mRefSelf.mMoney - mMoney + mOther.mMoney;
 
+        mRefSelf.mWood = mRefSelf.mWood - mWood + mOther.mWood;
+        mRefSelf.mClay = mRefSelf.mClay - mClay + mOther.mClay;
+        mRefSelf.mLimestone = mRefSelf.mLimestone - mLimestone + mOther.mLimestone;
+        mRefSelf.mIronR = mRefSelf.mIronR - mIronR + mOther.mIronR;
+        mRefSelf.mCopperR = mRefSelf.mCopperR - mMoney + mOther.mCopperR;
+
+
         mRefSelf.NeedSave();
         mRefSelf.SendResMsg();
         mRefSelf.SendMoneyMsg();
@@ -128,7 +155,13 @@ public  class CPlayerTrade
             CDyMsgPackManager.msgTempleArr[HeroPack.def_SC_TrideFinish].mValueArr[2].Set(mOther.mGold);
             CDyMsgPackManager.msgTempleArr[HeroPack.def_SC_TrideFinish].mValueArr[3].Set(mOther.mFood);
             CDyMsgPackManager.msgTempleArr[HeroPack.def_SC_TrideFinish].mValueArr[4].Set(mOther.mMoney);
-       
+
+            CDyMsgPackManager.msgTempleArr[HeroPack.def_SC_TrideFinish].mValueArr[4].Set(mOther.mWood);
+            CDyMsgPackManager.msgTempleArr[HeroPack.def_SC_TrideFinish].mValueArr[5].Set(mOther.mClay);
+            CDyMsgPackManager.msgTempleArr[HeroPack.def_SC_TrideFinish].mValueArr[6].Set(mOther.mLimestone);
+            CDyMsgPackManager.msgTempleArr[HeroPack.def_SC_TrideFinish].mValueArr[7].Set(mOther.mIron);
+            CDyMsgPackManager.msgTempleArr[HeroPack.def_SC_TrideFinish].mValueArr[8].Set(mOther.mCopperR);
+
             CDyMsgPackManager.msgTempleArr[HeroPack.def_SC_TrideFinish].SendMsg(mRefSelf.client);
         }
 

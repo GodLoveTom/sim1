@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
+using Sirius;
 
 //基础数据
 public class PlayerBase
@@ -25,6 +26,7 @@ public class PlayerBase
     //金币
     public double mMoney = 0;
 
+    //矿石
     public double mIron = 0;
 
     public double mCopper = 0;
@@ -38,6 +40,11 @@ public class PlayerBase
     public double mClay = 0;
 
     public double mLimestone = 0;
+
+    //
+    public double mIronR = 0;
+
+    public double mCopperR = 0;
 
     public double mDaoDe = 0;
 
@@ -71,7 +78,11 @@ public class PlayerBase
 
     public long mLastSearchT = 0;
 
-    public CPlayerTrade mTrade = new CPlayerTrade(); 
+    public CPlayerTrade mTrade = new CPlayerTrade();
+
+    public CInventPc mInvent = new CInventPc();
+
+    public CPcMachine mMachine = new CPcMachine();
 
     public PlayerBase()
     {
@@ -152,7 +163,7 @@ public class PlayerBase
         }   
     }
 
-
+   
     public CMineData [] BeSteal(double ZhiLi)
     {
         if ( ZhiLi > mZhiLi )
@@ -683,7 +694,8 @@ public class PlayerBase
             CDyMsgPackManager.msgTempleArr[HeroPack.def_SC_AskRes].mValueArr[4].Set(mWood);
             CDyMsgPackManager.msgTempleArr[HeroPack.def_SC_AskRes].mValueArr[5].Set(mClay);
             CDyMsgPackManager.msgTempleArr[HeroPack.def_SC_AskRes].mValueArr[6].Set(mLimestone);
-
+            CDyMsgPackManager.msgTempleArr[HeroPack.def_SC_AskRes].mValueArr[7].Set(mIronR);
+            CDyMsgPackManager.msgTempleArr[HeroPack.def_SC_AskRes].mValueArr[8].Set(mCopperR);
             CDyMsgPackManager.msgTempleArr[HeroPack.def_SC_AskRes].SendMsg(client);
         }
     }
@@ -816,6 +828,11 @@ public class PlayerBase
 
         node.AddParam("mIslogging", mIslogging?1:0);
 
+        node.AddParam("mIronR", mIronR );
+        node.AddParam("mCopperR", mCopperR);
+
+
+
     }
 
     public void Load(QuickData.CQDDataNode node)
@@ -869,6 +886,9 @@ public class PlayerBase
         mLimestone = node.GetParamValueDoubleByName("limestone", 0);
 
         mIslogging = (node.GetParamValueIntByName("mIslogging", 0) == 0) ? false : true;
+
+        mIronR = node.GetParamValueDoubleByName("mIronR", 0);
+        mCopperR = node.GetParamValueDoubleByName("mCopperR", 0);
     }
 
     public void LoadFromEdit(QuickData.CQDDataNode node)
@@ -918,6 +938,9 @@ public class PlayerBase
 
         mIslogging = (node.GetParamValueIntByName("mIslogging", 0) == 0) ? false : true;
 
+        mIronR = node.GetParamValueDoubleByName("mIronR", 0);
+        mCopperR = node.GetParamValueDoubleByName("mCopperR", 0);
+
         NeedSave();
     }
 
@@ -957,7 +980,7 @@ public class PlayerBase
             if (min <= mCurTiLi)
             {
                 mCurTiLi -= min;
-                digValue = mCurTiLi / (10 + (mCurTiLi - 10.0) / (100 + (mCurTiLi - 10) / 100.0));
+                digValue = mCurTiLi / (10 + (mCurTiLi - 10.0) / (100 + (mCurTiLi - 10) / 20.0));
                 digValue *= min;
             }
             else
@@ -965,7 +988,7 @@ public class PlayerBase
                 int tmpmin = (int)mCurTiLi;
                 min -= (int)mCurTiLi;
 
-                digValue = mCurTiLi / (10 + (mCurTiLi - 10.0) / (100 + (mCurTiLi - 10) / 100.0));
+                digValue = mCurTiLi / (10 + (mCurTiLi - 10.0) / (100 + (mCurTiLi - 10) / 20.0));
                 digValue *= mCurTiLi;
 
                 mCurTiLi = 0;

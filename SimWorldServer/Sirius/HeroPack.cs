@@ -41,7 +41,7 @@
 
     public const int def_CS_HeartJump = 136;
     public const int def_CS_ChangeNickName = 137;
-  
+
     public const int def_CS_IsMailExist = 150;
     public const int def_SC_IsMailExist = 151;
 
@@ -126,5 +126,23 @@
     public const int def_CS_BeginLogging = 255; //开始伐木
     public const int def_CS_Logging = 256;//查询伐木状态
     public const int def_SC_Logging = 257; //返回伐木状态
+
+    //创造发明
+    public const int def_CS_BeginInvent = 258; //提交一个创造发明
+    public const int def_CS_Invent = 259; //请求创造发明数据
+    public const int def_SC_Invent = 260; //创造发明数据
+
+    //专利
+    public const int def_CS_PatentApply = 261; //开始申请专利
+
+    //制造机器
+    public const int def_CS_MadeMachineByInvent = 262; //制造机器
+    public const int def_SC_MadeMachineByInvent = 263; //制造机器返回
+    public const int def_CS_Machine = 264; //申请玩家机器数据
+    public const int def_SC_Machine = 265; //返回玩家机器数据
+
+    //机器生产
+    public const int def_CS_ProduceByMachine = 266; //开始生产
+
 
 }

@@ -51,6 +51,9 @@ public class CTalk
     {
         if (mData.Count > 0)
         {
+            if (talkIndex >= mCurTalkIndex - 1)
+                return;
+
             if (talkIndex < 0)
                 talkIndex = mCurTalkIndex - 5<1?1: mCurTalkIndex - 5;
 

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Net;
+using Sirius;
+
 
 public class CGameserver
 {
@@ -515,7 +517,13 @@ public class CGameserver
             Double food = msg.mValueArr[4].GetDouble();
             Double money = msg.mValueArr[5].GetDouble();
 
-            p.mTrade.ChangeItem(iron, cobber, gold, food, money);
+            Double wood = msg.mValueArr[6].GetDouble();
+            Double clay = msg.mValueArr[7].GetDouble();
+            Double limestone = msg.mValueArr[8].GetDouble();
+            Double ironR = msg.mValueArr[9].GetDouble();
+            Double copperR = msg.mValueArr[10].GetDouble();
+
+            p.mTrade.ChangeItem(iron, cobber, gold, food, money,wood,clay, limestone,ironR, copperR);
            
         }
     }
@@ -626,6 +634,85 @@ public class CGameserver
         }
     }
 
+    //---
+    public void def_CS_BeginInvent(CDyMsgPack msg, IPEndPoint client)
+    {
+        long uid = msg.mValueArr[0].GetLong();
+        PlayerBase p = gDefine.gPlayerBase.Find(uid);
+        if (p != null)
+        {
+            string name = msg.mValueArr[1].GetString();
+            string des = msg.mValueArr[2].GetString();
+            gDefine.gInvent.CreateInvent(name, des, p);
+        }
+    }
+    public void def_CS_Invent(CDyMsgPack msg, IPEndPoint client)
+    {
+        long uid = msg.mValueArr[0].GetLong();
+        PlayerBase p = gDefine.gPlayerBase.Find(uid);
+        if (p != null)
+        {
+            long id = msg.mValueArr[1].GetLong();
+
+            if (id < 0)
+                p.mInvent.SendAllDataToPlayer(p);
+            else
+                gDefine.gInvent.SendInventMsg(id, p);
+        }
+    }
+    public void def_CS_PatentApply(CDyMsgPack msg, IPEndPoint client)
+    {
+        long uid = msg.mValueArr[0].GetLong();
+        PlayerBase p = gDefine.gPlayerBase.Find(uid);
+        if (p != null)
+        {
+            long inventId = msg.mValueArr[1].GetLong();
+            CInventData invent = gDefine.gInvent.Find(inventId);
+            if (invent != null && invent.mInventPcId == uid  && invent.mPatentId == 0)
+            {
+                invent.mPatentId = 1;
+                invent.NeedSave();
+                gDefine.gInvent.mPatentApplyDict.Add(invent);
+                invent.SendMsg(p);
+            }
+        }
+    }
+    public void def_CS_MadeMachineByInvent(CDyMsgPack msg, IPEndPoint client)
+    {
+        long uid = msg.mValueArr[0].GetLong();
+        PlayerBase p = gDefine.gPlayerBase.Find(uid);
+        if (p != null)
+        {
+            long inventId = msg.mValueArr[1].GetLong();
+            gDefine.gMachine.CreateMachine(inventId, p);
+        }
+    }
+
+    public void def_CS_Machine(CDyMsgPack msg, IPEndPoint client)
+    {
+        long uid = msg.mValueArr[0].GetLong();
+        PlayerBase p = gDefine.gPlayerBase.Find(uid);
+        if (p != null)
+        {
+            long machineId = msg.mValueArr[1].GetLong();
+            p.mMachine.SendMsg(machineId,p);
+        }
+    }
+
+    public void def_CS_ProduceByMachine(CDyMsgPack msg, IPEndPoint client)
+    {
+        long uid = msg.mValueArr[0].GetLong();
+        PlayerBase p = gDefine.gPlayerBase.Find(uid);
+        if (p != null)
+        {
+            long machineId = msg.mValueArr[1].GetLong();
+            bool on = msg.mValueArr[2].GetBool();
+            p.mMachine.BeginProduce( machineId, on, p);
+        }
+    }
+
+
+
 
     public void Init()
     {
@@ -692,9 +779,21 @@ public class CGameserver
 
         CDyMsgPackManager.RegisterCallBack(HeroPack.def_CS_BeginLogging, def_CS_BeginLogging);
         CDyMsgPackManager.RegisterCallBack(HeroPack.def_CS_Logging, def_CS_Logging);
-       
+
+        //创造发明
+        CDyMsgPackManager.RegisterCallBack(HeroPack.def_CS_BeginInvent, def_CS_BeginInvent);//提交一个创造发明
+        CDyMsgPackManager.RegisterCallBack(HeroPack.def_CS_Invent, def_CS_Invent);// //请求创造发明数据
+
+        CDyMsgPackManager.RegisterCallBack(HeroPack.def_CS_PatentApply, def_CS_PatentApply);// //开始申请专利
 
 
-    }
+        CDyMsgPackManager.RegisterCallBack(HeroPack.def_CS_MadeMachineByInvent, def_CS_MadeMachineByInvent);// // //制造机器
+        CDyMsgPackManager.RegisterCallBack(HeroPack.def_CS_Machine, def_CS_Machine);// //申请玩家机器数据
+        CDyMsgPackManager.RegisterCallBack(HeroPack.def_CS_ProduceByMachine, def_CS_ProduceByMachine);// //开始生产
+
+
+
+ 
+}
 
 }

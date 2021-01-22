@@ -1,6 +1,7 @@
 ﻿using System.Xml;
 using System.IO;
 using System;
+using Sirius;
 
 public static class gDefine
 {
@@ -9,6 +10,10 @@ public static class gDefine
     public static CTalk gTalkSys = new CTalk();
 
     public static CMine gMine = new CMine();
+
+    public static CInventManager gInvent = new CInventManager();
+
+    public static CMachineManager gMachine = new CMachineManager();
 
     //globe random
     public static System.Random gRandom = new System.Random();
@@ -58,6 +63,10 @@ public static class gDefine
         gMine.Load();
 
         gPlayerBase.ReCalcMine();
+
+        gInvent.Load();
+
+        gMachine.Load();
 
         gPostionChecker.Init();
 

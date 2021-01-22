@@ -80,7 +80,7 @@ public class CMyNet
             }
             catch(Exception e)
             {
-                Console.WriteLine("Exception in UPDServerListenLoop . udp");
+                Console.WriteLine("Exception in UPDServerListenLoop . udp" + e.ToString());
                 Close();
                 IPEndPoint localIpep = new IPEndPoint(IPAddress.Parse("0.0.0.0"), mPort); // 本机IP和监听端口号
                 udpServer = new UdpClient(localIpep);
