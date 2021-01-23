@@ -24,7 +24,7 @@ namespace Sirius
 
         public void CreateDataNode(CQDDataNode Node)
         {
-            mRefDataNode = gDefine.gDataSys.CreateNode(Node, mId.ToString(), LoadFromEditor, ReadyData);
+            mRefDataNode = gDefine.gDataSys.CreateNode(Node, "machineNode", LoadFromEditor, ReadyData);
         }
 
         public void SendMsg( PlayerBase P, bool Isnew =false)
@@ -71,7 +71,10 @@ namespace Sirius
 
                     mDuraMax -= 1;
 
+                    NeedSave();
+
                     P.NeedSave();
+
                     if (P.IsOnLine())
                     {
                         P.SendResMsg();
@@ -183,6 +186,8 @@ namespace Sirius
                     if (mDict[i].mDuraMax <= 0)
                     {
                         CMachine machine = mDict[i];
+                        machine.mOwnerId = -1;
+                        machine.mOwner = null;
                         machine.NeedSave();
                         mDict.RemoveAt(i);
                         i--;
@@ -289,7 +294,7 @@ namespace Sirius
                     machine.mOwner = P;
                     machine.mDuraMax = 1;
 
-                    machine.CreateDataNode(mRefDataNode);
+                    
 
                     machine.NeedSave();
 
@@ -311,7 +316,11 @@ namespace Sirius
                 mRecycleDict.RemoveAt(mRecycleDict.Count - 1);
             }
             else
+            {
                 machine = new CMachine();
+                machine.CreateDataNode(mRefDataNode);
+            }
+                
             return machine;
         }
     }
