@@ -10,12 +10,15 @@ Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
 		Release|x86 = Release|x86
+		新的生成|x86 = 新的生成|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{27AE5F21-2021-4C5F-910A-5E8F47CA01D7}.Debug|x86.ActiveCfg = Debug|x86
 		{27AE5F21-2021-4C5F-910A-5E8F47CA01D7}.Debug|x86.Build.0 = Debug|x86
 		{27AE5F21-2021-4C5F-910A-5E8F47CA01D7}.Release|x86.ActiveCfg = Debug|x86
 		{27AE5F21-2021-4C5F-910A-5E8F47CA01D7}.Release|x86.Build.0 = Debug|x86
+		{27AE5F21-2021-4C5F-910A-5E8F47CA01D7}.新的生成|x86.ActiveCfg = 新的生成|x86
+		{27AE5F21-2021-4C5F-910A-5E8F47CA01D7}.新的生成|x86.Build.0 = 新的生成|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -246,8 +246,16 @@ public static class CDyMsgPackManager
                 msgTempleArr[msgId] != null && msgTempleArr[msgId].mCallBackFunc != null)
         {
             CDyMsgPack pack = msgTempleArr[msgId].CloneSelf();
-            pack.ReadPackFromStream(msg.data);
-            pack.mCallBackFunc(pack, msg.client);
+            try
+            {
+                pack.ReadPackFromStream(msg.data);
+                pack.mCallBackFunc(pack, msg.client);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Exception in DoMsg " + e.ToString());
+            }
+            
         }
     }
 
