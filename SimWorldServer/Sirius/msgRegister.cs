@@ -186,6 +186,7 @@
         CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_CS_Login, CBaseValue.eBaseValue.String);//name
         CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_CS_Login, CBaseValue.eBaseValue.String);//psw
         CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_CS_Login, CBaseValue.eBaseValue.Byte);//0 game account ; 1 store account
+        CDyMsgPackManager.RegisterMsgPackValue(HeroPack.def_CS_Login, CBaseValue.eBaseValue.String);//ver
 
 
         //登录成功返回消息

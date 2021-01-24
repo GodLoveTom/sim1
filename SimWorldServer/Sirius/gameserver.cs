@@ -51,6 +51,17 @@ public class CGameserver
         string name = msg.mValueArr[0].GetString();
         string password = msg.mValueArr[1].GetString();
         byte isUseStoreArrcount = msg.mValueArr[2].GetByte();
+        string version = msg.mValueArr[3].GetString();
+
+        if (version != "v1.0.1")
+        {
+            lock (CDyMsgPackManager.msgTempleArr[HeroPack.def_SC_LoginErr].mLock)
+            {
+                CDyMsgPackManager.msgTempleArr[HeroPack.def_SC_LoginErr].mValueArr[0].Set(4);//result
+                CDyMsgPackManager.msgTempleArr[HeroPack.def_SC_LoginErr].SendMsg(client);
+            }
+            return;
+        }
 
         int result = -1;
         PlayerBase data = gDefine.gLoginBase.LoginIn(name, password, ref result);

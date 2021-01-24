@@ -253,7 +253,7 @@ public static class CDyMsgPackManager
             }
             catch (Exception e)
             {
-                Console.WriteLine("Exception in DoMsg " + e.ToString());
+                //Console.WriteLine("Exception in DoMsg ");
             }
             
         }
