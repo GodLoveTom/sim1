@@ -48,7 +48,7 @@ namespace Sirius
         public void UpdateProduce(PlayerBase P)
         {
             long t = System.DateTime.Now.Ticks - mProductT;
-            if ( t > (long)60 * (long)10000000 && t > (long)( mRefInvent.mProductS * (long)10000000)) 
+            if ( t > mRefInvent.mProductS * (long)60 * (long)10000000 ) 
             {
                 mProductT = System.DateTime.Now.Ticks;
 
@@ -170,6 +170,11 @@ namespace Sirius
             foreach (var v in mDict)
                 if (v.mId == MachineId)
                 {
+                    if(On)
+                    {
+                        if (!v.mIsProductting || v.mProductT <= 0)
+                            v.mProductT = System.DateTime.Now.Ticks;
+                    }
                     v.mIsProductting = On;
                     v.SendMsg(P);
                     break;
