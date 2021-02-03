@@ -401,11 +401,11 @@ public class PlayerManager_Base
         XmlDocument doc = new XmlDocument();
         string path = System.Environment.CurrentDirectory + "\\refresh\\refresh.xml";
         try
-        {
+         {
             
             doc.Load(path);
         }
-        catch(Exception)
+        catch(Exception e)        
         {
             Console.WriteLine("没有refresh.xml文件需要处理");
             return;

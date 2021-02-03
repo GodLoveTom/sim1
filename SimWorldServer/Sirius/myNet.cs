@@ -107,9 +107,13 @@ public class CMyNet
                 {
                     long playerId = BitConverter.ToInt64(msg.data, 8);
                     PlayerBase p = gDefine.gPlayerBase.Find(playerId);
-                    msg = p.mSureMsg.mGetMsg.CheckMsg(msgIndex, msg);
-                    if( msg != null )
-                        CDyMsgPackManager.DoMsg(msg);
+                    if(p!=null)
+                    {
+                        msg = p.mSureMsg.mGetMsg.CheckMsg(msgIndex, msg);
+                        if (msg != null)
+                            CDyMsgPackManager.DoMsg(msg);
+                    }
+                        
                 }
                 else
                     CDyMsgPackManager.DoMsg(msg);
